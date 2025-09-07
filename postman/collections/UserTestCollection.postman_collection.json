@@ -1,0 +1,367 @@
+{
+	"info": {
+		"_postman_id": "b167eff5-e570-4e0b-a112-372bd9aab491",
+		"name": "UserTestCollection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21774698",
+		"_collection_link": "https://dsyteam.postman.co/workspace/5e86e1a2-d5b0-4c4c-b6cd-b3beed48f063/collection/21774698-b167eff5-e570-4e0b-a112-372bd9aab491?action=share&source=collection_link&creator=21774698"
+	},
+	"item": [
+		{
+			"name": "addUser",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"/*\r",
+							"pm.test(\"Check if the status code is 201\", function(){\r",
+							"    pm.expect(pm.response.to.have.status(201));\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check if response time is less then 200ms\", function(){\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(100);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check sellected env\", function(){\r",
+							"    pm.expect( pm.environment.get('url')).to.be.equal(\"preprod\")\r",
+							"})  \r",
+							"*/\r",
+							"/* Respons tests */ \r",
+							"/*\r",
+							"pm.test(\"check loaded data vs Payload \", function () {\r",
+							"    var jsonRep = pm.response.json();\r",
+							"    if (jsonRep != null) \r",
+							"    {\r",
+							"        pm.expect(jsonRep.firstname).to.eql('Spencer');\r",
+							"        pm.expect(jsonRep.lastname).to.eql('Rohan');\r",
+							"        pm.expect(jsonRep.age).to.eql(54); // 54  \r",
+							"    }else false\r",
+							"});\r",
+							"*/\r",
+							"\r",
+							"pm.test(\"Check if the status code is 201\", function(){\r",
+							"    pm.expect(pm.response.to.have.status(201));\r",
+							"});\r",
+							"\r",
+							"\r",
+							"if (pm.response.to.have.status(201)){\r",
+							"    \r",
+							"    var jsonRep = pm.response.json();\r",
+							"    console.info(\"New user created with the id : \"+jsonRep.id );\r",
+							"    console.info(\"User's info: \\n\\t firstname: \" + jsonRep.firstname + \r",
+							"    \"\\n\\t lastname : \" + jsonRep.lastname +\r",
+							"    \"\\n\\t age : \" +  jsonRep.age );\r",
+							"    pm.collectionVariables.set('UserId',jsonRep.id)\r",
+							"\r",
+							"}\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstname\": \"Spencer\",\r\n    \"lastname\": \"Rohan\",\r\n    \"age\": 54\r\n}    ",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://6399e35616b0fdad774cf364.mockapi.io/testapi/api/v1/users",
+					"protocol": "https",
+					"host": [
+						"6399e35616b0fdad774cf364",
+						"mockapi",
+						"io"
+					],
+					"path": [
+						"testapi",
+						"api",
+						"v1",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetUserByID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check if the status code is 200\", function(){\r",
+							"    pm.expect(pm.response.to.have.status(200));\r",
+							"});\r",
+							"\r",
+							"if (pm.response.to.have.status(200)){\r",
+							"    pm.test.skip(\"check if the add worked correclty\", function(){\r",
+							"        var jsonRep = pm.response.json();\r",
+							"        pm.expect(jsonRep.firstname).to.eql('Spencer')\r",
+							"        pm.expect(jsonRep.lastname).to.eql('Rohan')\r",
+							"        pm.expect(jsonRep.age).to.eql('54')\r",
+							"    });\r",
+							"    \r",
+							"}\r",
+							"\r",
+							"\r",
+							"\r",
+							"if (pm.response.to.have.status(200)){\r",
+							"    pm.test(\"check if the age is 54\", function(){\r",
+							"        var jsonRep = pm.response.json();\r",
+							"        pm.expect(jsonRep.age).to.eql('54')\r",
+							"\r",
+							"    });\r",
+							"}\r",
+							"if (pm.response.to.have.status(200)){\r",
+							"    pm.test(\"check if the Firstname is Spencer \", function(){\r",
+							"        var jsonRep = pm.response.json();\r",
+							"        pm.expect(jsonRep.firstname).to.eql('Spencer')\r",
+							"    });\r",
+							"}\r",
+							"  \r",
+							"if (pm.response.to.have.status(200)){\r",
+							"    pm.test(\"check if the Lastname is Rohan \", function(){\r",
+							"        var jsonRep = pm.response.json();\r",
+							"        pm.expect(jsonRep.lastname).to.eql('Rohan')\r",
+							"    });\r",
+							"}\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://6399e35616b0fdad774cf364.mockapi.io/testapi/api/v1/users/{{UserId}}",
+					"protocol": "https",
+					"host": [
+						"6399e35616b0fdad774cf364",
+						"mockapi",
+						"io"
+					],
+					"path": [
+						"testapi",
+						"api",
+						"v1",
+						"users",
+						"{{UserId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateUser",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check if the status code is 200\", function(){\r",
+							"    pm.expect(pm.response.to.have.status(200));\r",
+							"});\r",
+							"\r",
+							"if (pm.response.to.have.status(200)){\r",
+							"    \r",
+							"    var jsonRep = pm.response.json();\r",
+							"    console.info(\"User (\"+jsonRep.id+ \") infos updated to: \" );\r",
+							"    console.info(\"\\n\\t firstname: \" + jsonRep.firstname + \r",
+							"    \"\\n\\t lastname : \" + jsonRep.lastname +\r",
+							"    \"\\n\\t age : \" +  jsonRep.age );\r",
+							"\r",
+							"}"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstname\": \"azaiz\",\r\n    \"lastname\": \"souissi\",\r\n    \"age\": 26\r\n}    ",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://6399e35616b0fdad774cf364.mockapi.io/testapi/api/v1/users/{{UserId}}",
+					"protocol": "https",
+					"host": [
+						"6399e35616b0fdad774cf364",
+						"mockapi",
+						"io"
+					],
+					"path": [
+						"testapi",
+						"api",
+						"v1",
+						"users",
+						"{{UserId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetUpdateCheck",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check if the status code is 200\", function(){\r",
+							"    pm.expect(pm.response.to.have.status(200));\r",
+							"});\r",
+							"if (pm.response.to.have.status(200)){\r",
+							"    pm.test.skip(\"check if the update worked correclty\", function(){\r",
+							"        var jsonRep = pm.response.json();\r",
+							"        pm.expect(jsonRep.age).to.eql('52')\r",
+							"        pm.expect(jsonRep.firstname).to.eql('azaiz')\r",
+							"        pm.expect(jsonRep.lastname).to.eql('souissi')\r",
+							"       \r",
+							"    });\r",
+							"}\r",
+							"\r",
+							"\r",
+							"if (pm.response.to.have.status(200)){\r",
+							"    pm.test(\"check if the age still 54\", function(){\r",
+							"        var jsonRep = pm.response.json();\r",
+							"        pm.expect(jsonRep.age).to.eql('54')\r",
+							"\r",
+							"    });\r",
+							"}\r",
+							"if (pm.response.to.have.status(200)){\r",
+							"    pm.test(\"check if the Firstname is updated correclty\", function(){\r",
+							"        var jsonRep = pm.response.json();\r",
+							"        pm.expect(jsonRep.firstname).to.eql('azaiz')\r",
+							"    });\r",
+							"}\r",
+							"\r",
+							"if (pm.response.to.have.status(200)){\r",
+							"    pm.test.skip(\"check if the Lastname is updated correclty\", function(){\r",
+							"        var jsonRep = pm.response.json();\r",
+							"        pm.expect(jsonRep.lastname).to.eql('souissi')\r",
+							"    });\r",
+							"}\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://6399e35616b0fdad774cf364.mockapi.io/testapi/api/v1/users/{{UserId}}",
+					"protocol": "https",
+					"host": [
+						"6399e35616b0fdad774cf364",
+						"mockapi",
+						"io"
+					],
+					"path": [
+						"testapi",
+						"api",
+						"v1",
+						"users",
+						"{{UserId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteUser",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check if the status code is 200\", function(){\r",
+							"    pm.expect(pm.response.to.have.status(200));\r",
+							"});\r",
+							"\r",
+							"pm.collectionVariables.set('UserId',null)\r",
+							"console.info(\"The Collection Var UserId is rest to null\")\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://6399e35616b0fdad774cf364.mockapi.io/testapi/api/v1/users/{{UserId}}",
+					"protocol": "https",
+					"host": [
+						"6399e35616b0fdad774cf364",
+						"mockapi",
+						"io"
+					],
+					"path": [
+						"testapi",
+						"api",
+						"v1",
+						"users",
+						"{{UserId}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "UserId",
+			"value": ""
+		},
+		{
+			"key": "prenom",
+			"value": ""
+		},
+		{
+			"key": "nom",
+			"value": ""
+		}
+	]
+}
