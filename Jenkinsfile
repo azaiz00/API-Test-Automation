@@ -64,4 +64,4 @@ pipeline {
     }
   }
 }
-// test add 
+// test pipline auto execution  
