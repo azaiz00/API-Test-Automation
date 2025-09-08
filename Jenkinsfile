@@ -12,7 +12,7 @@ pipeline {
     stage('Lire URL de la collection (sans clé)') {
       steps {
         script {
-          env.POSTMAN_COLLECTION_URL = (readFile('postman/collections/UserTestCollection_url.txt').replace("372bd9aab491",environnement)).trim()
+          env.POSTMAN_COLLECTION_URL = readFile('postman/collections/UserTestCollection_url.txt').trim()
         }
       }
     }
